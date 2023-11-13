@@ -2,20 +2,22 @@ package agenda;
 
 import java.time.*;
 
+import java.time.temporal.ChronoUnit;
+
 public class Event {
 
     /**
      * The myTitle of this event
      */
     private String myTitle;
-    
+
     /**
      * The starting time of the event
      */
     private LocalDateTime myStart;
 
     /**
-     * The durarion of the event 
+     * The durarion of the event
      */
     private Duration myDuration;
 
@@ -32,6 +34,13 @@ public class Event {
         this.myStart = start;
         this.myDuration = duration;
     }
+    public String toString() {
+        return "Event{" +
+                "myTitle='" + myTitle + '\'' +
+                ", myStart=" + myStart +
+                ", myDuration=" + myDuration +
+                '}';
+    }
 
     /**
      * Tests if an event occurs on a given day
@@ -40,10 +49,10 @@ public class Event {
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        return !(aDay.isBefore(this.getStart().toLocalDate()) || aDay.isAfter(this.getStart().plus(this.getDuration()).toLocalDate()));
     }
-   
+
+
     /**
      * @return the myTitle
      */
@@ -66,6 +75,6 @@ public class Event {
         return myDuration;
     }
 
-   
-    
+
+
 }
